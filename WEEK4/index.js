@@ -7,13 +7,51 @@ const PersonSchema = new mongoose.Schema({
     }, 
     age: Number, 
     gender: String, 
-    salary: Number 
+    salary: Number ,
+    city: String
 });
 const Person = mongoose.model( 
     'modelname', 
     PersonSchema, 
     'personCollection' 
 ); 
+// inserting three records
+async function insertPeople() {
+    const people = [
+        {
+            name: 'Ram',
+            age: 25,
+            gender: 'Male',
+            salary: 2000,
+            city: 'London'
+        },
+        {
+            name: 'Sita',
+            age: 28,
+            gender: 'Female',
+            salary: 2500,
+            city: 'Manchester'
+        },
+        {
+            name: 'Hari',
+            age: 32,
+            gender: 'Male',
+            salary: 3000,
+            city: 'London'
+        }
+    ];
+
+    await Person.insertMany(people);
+    console.log('Three records inserted successfully');
+}
+
+// 3. Display people from a specific city
+async function findPeopleByCity() {
+    const result = await Person.find({ city: 'London' });
+    console.log('People living in London:');
+    console.log(result);
+}
+
  
 // Function to insert one document 
 async function insertOne() { 
@@ -75,10 +113,12 @@ async function main() {
          await insertOne(); 
          await insertMany();
         await findAll();
-        await findFemalesOver30() 
-       await countDocuments() 
-    await deleteManyPersons()
-       await updateManyPersons()
+        await findFemalesOver30(); 
+       await countDocuments() ;
+    await deleteManyPersons();
+       await updateManyPersons();
+       await insertPeople();
+       await findPeopleByCity();
  
         } catch (err) { 
         console.error('Error:', err); 
