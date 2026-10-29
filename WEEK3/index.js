@@ -34,4 +34,3 @@ person1= new person("prem","Uk","prem123@gMAIL.COM")
 console.log("using Person Module",person1.getPersonInfo()) 
 console.log("Programe ended") 
 
-
