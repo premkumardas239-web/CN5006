@@ -99,7 +99,7 @@ async function countDocuments() {
      return count;   // <-- Important
 }
 
-// Delete all documents where age >= 25
+// Delete all documents where age >= 45
 async function deleteManyPersons() {
 
     const result = await Person.deleteMany({

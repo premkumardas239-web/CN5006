@@ -193,7 +193,41 @@ app.get('/Showform', (req, res) => {
         root: __dirname
     });
 });
- app.get('/findfemaleof30', (req, res) => { });
+ app.get('/findFemalesOver30', async (req, res) => {
+    try {
+        console.log("calling females over 30")
+        const result = await findFemalesOver30();
+        res.json(result);
+        console.log("result")
+    } catch (err) {
+        res.status(500).json(err);
+    }
+   
+});
+app.get('/countDocuments', async (req, res) => {
+    try {
+        console.log("calling count documents")
+        const result = await countDocuments();
+        res.json(result);
+        console.log("result")
+    } catch (err) {
+        res.status(500).json(err);
+    }
+   
+});
+// Update multiple persons 
+app.get('/updateManyPersons', async (req, res) => {
+    try {
+        console.log("Calling update many persons");
+
+        const result = await updateManyPersons();
+
+        res.json(result);
+
+    } catch (err) {
+        res.status(500).json(err);
+    }
+});
 
 app.get('/persons', async (req, res) => {
     try {
@@ -206,7 +240,26 @@ app.get('/persons', async (req, res) => {
     }
    
 });
+//5. DELETE MANY persons
+app.get('/deleteManyPersons', async (req, res) => {
+    try {
+        console.log("Calling delete many persons");
 
+        const result = await deleteManyPersons();
+
+        res.json({
+            success: true,
+            message: "persons deleted successfully",
+            deletedCount: result.deletedCount
+        });
+
+    } catch (err) {
+        res.status(500).json({
+            success: false,
+            message: err.message
+        });
+    }
+});
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
