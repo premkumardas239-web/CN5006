@@ -6,6 +6,9 @@ import cloudy from "./cloudy.jpg";
 function Weathermoodwidget({ pic: selectedEmoji }) { 
   const [image, setImage] = useState(sunny); 
   const [count, setCount] = useState(0); 
+      const [message, setMessage] = useState("");
+  
+
  
   useEffect(() => { 
     const emojiImages = { 
@@ -19,6 +22,15 @@ function Weathermoodwidget({ pic: selectedEmoji }) {
  
   const handleClick = () => { 
     setCount((prevCount) => prevCount + 1); 
+    if (selectedEmoji === "sunny") {
+            setMessage("I'm feeling happy!");
+        } 
+        else if (selectedEmoji === "rainy") {
+            setMessage("I'm feeling sad.");
+        } 
+        else if (selectedEmoji === "cloudy") {
+            setMessage("I'm disappointed.");
+        }
   }; 
  
   return ( 
@@ -29,6 +41,7 @@ function Weathermoodwidget({ pic: selectedEmoji }) {
           {count} 
           <img src={image} alt={selectedEmoji} /> 
         </button> 
+        <p>{message}</p>
       </p> 
  
   <p>&nbsp;</p> 
